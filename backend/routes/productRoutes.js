@@ -1,0 +1,13 @@
+const express= require("express");
+const {getProducts,getProduct,createProduct,updateProduct,deleteProduct}=require("../controllers/productController");
+const isLoggedIn=require("../middleware/isLoggedIn");
+const isAdmin=require("../middleware/isAdmin");
+const multer=require("multer");
+const upload=multer({dest:"uploads/"});
+const router=express.Router();
+router.get("/",getProducts);
+router.get("/:id",getProduct);
+router.post("/",isLoggedIn,isAdmin,upload.single("image"),createProduct);
+router.put("/:id",isLoggedIn,isAdmin,upload.single("image"),updateProduct);
+router.delete("/:id",isLoggedIn,isAdmin,deleteProduct);
+module.exports=router;
