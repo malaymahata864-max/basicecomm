@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../store/slices/cartSlice';
 import StarRating from '../ui/StarRating';
 import toast from 'react-hot-toast';
@@ -29,6 +29,7 @@ const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
   const averageRating = Number(product.avgRating ?? 0);
   const reviewCount = product.ratings?.length ?? 0;
+  const { user } = useSelector((state) => state.auth);
 
   const handleAdd = (e) => {
     e.preventDefault();
@@ -93,7 +94,8 @@ const ProductCard = ({ product }) => {
           <span style={{ color: '#f1f5f9', fontWeight: 800, fontSize: '1.125rem', letterSpacing: '-0.01em' }}>
             ₹{product.price?.toLocaleString('en-IN')}
           </span>
-          <button onClick={handleAdd} disabled={product.stock === 0}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <button onClick={handleAdd} disabled={product.stock === 0}
             style={{
               display: 'flex', alignItems: 'center', gap: '0.375rem',
               padding: '0.5rem 0.875rem', borderRadius: '0.625rem', border: 'none', cursor: product.stock === 0 ? 'not-allowed' : 'pointer',
@@ -109,6 +111,12 @@ const ProductCard = ({ product }) => {
             onMouseUp={e => { e.currentTarget.style.transform = 'scale(1)'; }}>
             🛒 Add
           </button>
+          {user && user.role === 'admin' && (
+            <Link to={`/admin/products/${product._id}/edit`} onClick={(e)=>e.stopPropagation()} className="text-sm px-3 py-1 rounded-md bg-[#2a2e42] text-slate-200" style={{ textDecoration: 'none' }}>
+              Edit
+            </Link>
+          )}
+          </div>
         </div>
       </div>
     </Link>
