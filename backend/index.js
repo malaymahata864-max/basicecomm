@@ -5,6 +5,7 @@ const connectDB = require("./config/database");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const path = require('path');
+const fs = require('fs');
 // Connect to MongoDB
 connectDB();
 
@@ -24,10 +25,14 @@ app.use('/api/orders', require('./routes/orderRoutes'));
 app.use('/api/analytics', require('./routes/analyticsRoutes'));
 const PORT= process.env.PORT || 5000;
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../frontend/build')));
+  const frontendDistPath = path.join(__dirname, '../frontend/dist');
+  const frontendBuildPath = path.join(__dirname, '../frontend/build');
+  const frontendPath = fs.existsSync(frontendDistPath) ? frontendDistPath : frontendBuildPath;
+
+  app.use(express.static(frontendPath));
   
   app.use((req, res) => {
-    res.sendFile(path.resolve(__dirname, '../frontend/build/index.html'));
+    res.sendFile(path.resolve(frontendPath, 'index.html'));
   });
 } else {
   app.get('/', (req, res) => {
