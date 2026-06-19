@@ -1,4 +1,5 @@
 const Order=require("../models/Order");
+const Product = require('../models/Product');
 //ALL ORDERS
 const getOrders=async(req,res)=>{
     try{
@@ -37,6 +38,20 @@ const createOrder=async(req,res)=>{
         if(!items || items.length===0){
             return res.status(400).json({message:"Order must contain at least one item"});
         }
+        // Validate stock and decrement
+        for (const item of items) {
+            const product = await Product.findById(item.productId);
+            if (!product) {
+                return res.status(404).json({ message: `Product ${item.productId} not found` });
+            }
+            const qty = Number(item.qty ?? item.quantity ?? 0);
+            if (product.stock < qty) {
+                return res.status(400).json({ message: `Insufficient stock for product ${product._id}` });
+            }
+            product.stock = product.stock - qty;
+            await product.save();
+        }
+
         const order=await Order.create({userId:req.user.id,items,totalAmount,address});
         res.status(201).json(order);
     }

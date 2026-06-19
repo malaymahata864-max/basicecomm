@@ -13,6 +13,7 @@ import OrdersPage from '../pages/OrdersPage';
 import OrderDetailPage from '../pages/OrderDetailPage';
 import AdminAnalyticsPage from '../pages/AdminAnalyticsPage';
 import AdminProductUploadPage from '../pages/AdminProductUploadPage';
+import AdminProductEditPage from '../pages/AdminProductEditPage';
 import NotFoundPage from '../pages/NotFoundPage';
 
 const AppRouter = () => {
@@ -48,6 +49,7 @@ const AppRouter = () => {
       <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
         <Route path="/admin/analytics" element={<AdminAnalyticsPage />} />
         <Route path="/admin/products/new" element={<AdminProductUploadPage />} />
+        <Route path="/admin/products/:id/edit" element={<AdminProductEditPage />} />
       </Route>
 
       {/* 404 */}

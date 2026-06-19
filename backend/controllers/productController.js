@@ -52,10 +52,11 @@ const createProduct=async(req,res)=>{
 //UPDATE PRODUCT
 const updateProduct=async(req,res)=>{
     try {
-    const { name, description, price, category, stock } = req.body;
+    const { name, title, description, price, category, stock } = req.body;
     const product = await Product.findById(req.params.id);
     if (product) {
-            product.name = name ?? product.name;
+            // Allow `title` as alias for `name` from admin UI
+            product.name = title ?? name ?? product.name;
             product.description = description ?? product.description;
             product.price = price !== undefined ? Number(price) : product.price;
             product.category = category ?? product.category;
