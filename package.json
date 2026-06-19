@@ -1,0 +1,29 @@
+{
+  "name": "ecom",
+  "version": "1.0.0",
+  "description": "a basic full stack ecommerce",
+  "homepage": "https://github.com/malaymahata864-max/basicecomm#readme",
+  "bugs": {
+    "url": "https://github.com/malaymahata864-max/basicecomm/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/malaymahata864-max/basicecomm.git"
+  },
+  "license": "ISC",
+  "author": "malay mahata",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "build": "cd frontend && npm install && npm run build",
+    "start": "cd backend && npm start",
+    "dev": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+    "start:backend": "npm --prefix backend run dev",
+    "start:frontend": "npm --prefix frontend run dev",
+    "seed": "npm --prefix backend run seed"
+  },
+  "dependencies": {
+    "concurrently": "^10.0.3"
+  }
+}

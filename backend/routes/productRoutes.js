@@ -1,5 +1,5 @@
 const express= require("express");
-const {getProducts,getProduct,createProduct,updateProduct,deleteProduct}=require("../controllers/productController");
+const {getProducts,getProduct,createProduct,updateProduct,deleteProduct,updateRating}=require("../controllers/productController");
 const isLoggedIn=require("../middleware/isLoggedIn");
 const isAdmin=require("../middleware/isAdmin");
 const multer=require("multer");
@@ -9,5 +9,6 @@ router.get("/",getProducts);
 router.get("/:id",getProduct);
 router.post("/",isLoggedIn,isAdmin,upload.single("image"),createProduct);
 router.put("/:id",isLoggedIn,isAdmin,upload.single("image"),updateProduct);
+router.put("/:id/rating",isLoggedIn,updateRating);
 router.delete("/:id",isLoggedIn,isAdmin,deleteProduct);
 module.exports=router;

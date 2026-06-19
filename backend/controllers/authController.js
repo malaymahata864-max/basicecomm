@@ -1,6 +1,13 @@
 const User=require('../models/User');
 const jwt=require('jsonwebtoken');
 const bcrypt=require('bcryptjs');
+
+const cookieOptions = {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+};
 //const sendEmail=require('../utils/sendEmail');
 // Register a new user
 const registerUser=async(req,res)=>{
@@ -24,7 +31,7 @@ const registerUser=async(req,res)=>{
          // Generate token
         const token=jwt.sign({id:user._id},process.env.JWT_SECRET,{expiresIn:"30d"});
         // Send token in cookie
-        res.cookie("token",token,{httpOnly:true,secure:true,maxAge:30*24*60*60*1000});
+                res.cookie("token",token,cookieOptions);
         res.status(201).json({message:"User registered successfully",user,token});
         const subject="Welcome to our platform!";
         const text=`Hi ${name},\n\nThank you for registering on our platform. We're excited to have you on board!\n\nBest regards,\nThe Team`;
@@ -48,7 +55,7 @@ const loginUser=async(req,res)=>{
             return res.status(400).json({message:"Invalid credentials"});
         }
         const token=jwt.sign({id:user._id},process.env.JWT_SECRET,{expiresIn:"30d"});
-        res.cookie("token",token,{httpOnly:true,secure:true,maxAge:30*24*60*60*1000});
+        res.cookie("token",token,cookieOptions);
         res.status(200).json({message:"Login successful",user,token});
     }
     catch(error){

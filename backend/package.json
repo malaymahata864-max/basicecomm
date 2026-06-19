@@ -8,6 +8,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
+    "dev": "nodemon index.js",
     "test": "node index.js",
     "seed": "node dummy.js"
   },

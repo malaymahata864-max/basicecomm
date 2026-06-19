@@ -7,8 +7,13 @@ const productSchema = new mongoose.Schema({
   category: { type: String, required: true },
   stock: { type: Number, required: true },
   imageUrl: { type: String, required: true },
-  ratings: { type: Number, default: 0 },
-  numReviews: { type: Number, default: 0 }
+  ratings: [
+    {
+      userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+      rating: { type: Number, required: true }
+    }
+  ],
+  avgRating: { type: Number, default: 0 }
 }, { timestamps: true });
 
 module.exports = mongoose.model('Product', productSchema);

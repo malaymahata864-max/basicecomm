@@ -13,7 +13,8 @@ const products = [
     price: 499,
     category: 'Apparel',
     stock: 45,
-    imageUrl: 'https://picsum.photos/seed/classic-tee/600/600'
+    imageUrl: 'https://picsum.photos/seed/classic-tee/600/600',
+    ratings:[]
   },
   {
     name: 'Minimal Leather Wallet',
@@ -21,7 +22,8 @@ const products = [
     price: 1299,
     category: 'Accessories',
     stock: 28,
-    imageUrl: 'https://picsum.photos/seed/leather-wallet/600/600'
+    imageUrl: 'https://picsum.photos/seed/leather-wallet/600/600',
+    ratings:[]
   },
   {
     name: 'Noise-Canceling Earbuds',
@@ -29,7 +31,8 @@ const products = [
     price: 2499,
     category: 'Electronics',
     stock: 16,
-    imageUrl: 'https://picsum.photos/seed/earbuds/600/600'
+    imageUrl: 'https://picsum.photos/seed/earbuds/600/600',
+    ratings:[]
   }
 ];
 
