@@ -67,10 +67,10 @@ const ProfilePage = () => {
   ];
 
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12 animate-fadeIn">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 animate-fadeIn">
       {/* Profile card */}
-      <div className="bg-[#12141f] border border-[#2a2e42] rounded-3xl p-8 text-center mb-8">
-        <div className="w-24 h-24 rounded-full bg-linear-to-br from-violet-500 to-purple-600 flex items-center justify-center text-white text-4xl font-black mx-auto mb-5 ring-4 ring-violet-500/20">
+      <div className="bg-[#12141f] border border-[#2a2e42] rounded-3xl p-10 md:p-12 text-center mb-8">
+        <div className="w-28 h-28 rounded-full bg-linear-to-br from-violet-500 to-purple-600 flex items-center justify-center text-white text-4xl font-black mx-auto mb-5 ring-4 ring-violet-500/20">
           {user?.name?.[0]?.toUpperCase() || 'U'}
         </div>
         <h1 className="text-2xl font-bold text-white mb-1">{user?.name}</h1>
@@ -83,12 +83,12 @@ const ProfilePage = () => {
       </div>
 
       {/* Quick actions */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         {actions.map(({ icon, title, desc, to, color }) => (
           <button
             key={to}
             onClick={() => navigate(to)}
-            className={`p-5 bg-linear-to-br ${color} border rounded-2xl text-left card-hover transition-all group`}
+            className={`p-5 md:p-6 bg-linear-to-br ${color} border rounded-2xl text-left card-hover transition-all group`}
           >
             <div className="mb-3 group-hover:scale-110 transition-transform duration-300">{icon}</div>
             <p className="text-white font-semibold text-sm mb-1">{title}</p>
@@ -98,7 +98,7 @@ const ProfilePage = () => {
       </div>
 
       {/* Account info */}
-      <div className="bg-[#12141f] border border-[#2a2e42] rounded-2xl p-6 mb-6">
+      <div className="bg-[#12141f] border border-[#2a2e42] rounded-2xl p-6 md:p-8 mb-6">
         <h2 className="text-white font-semibold text-sm mb-4">Account Information</h2>
         <div className="space-y-3">
           {[
